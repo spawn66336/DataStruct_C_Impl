@@ -74,6 +74,12 @@
 	return L.len;
 }
 
+ Status ListCapacity_Sq( SqList& L )
+ {
+	 return L.capacity;
+ }
+
+
  Status GetElem_Sq( SqList& L , const int i , ElemType& e )
 {
 	if( i < 1 || i > L.len )
@@ -209,3 +215,35 @@
 	}
 	return OK;
 }
+
+ void MergeList_Sq( SqList& La , SqList& Lb , SqList& Lc )
+ { 
+	 if( OK != InitList_Sq(Lc) )
+	 {
+		 return;
+	 }
+
+	 int i = 1;
+	 int j = 1;
+	 while( i <= La.len && 
+		       j <= Lb.len )
+	 {
+		 if( La.lp_elem[i-1] < Lb.lp_elem[j-1] )
+		 {
+			 ListInsert_Sq(Lc , Lc.len+1 , La.lp_elem[i-1]); i++;
+		 }else{
+			 ListInsert_Sq(Lc , Lc.len+1 , Lb.lp_elem[j-1]); j++;
+		 }
+	 }
+
+	 while( i <= La.len )
+	 {
+		  ListInsert_Sq(Lc , Lc.len+1 , La.lp_elem[i-1]); i++;
+	 }
+	 while( j <= Lb.len )
+	 {
+		  ListInsert_Sq(Lc , Lc.len+1 , Lb.lp_elem[j-1]); j++;
+	 }
+	 
+ }
+

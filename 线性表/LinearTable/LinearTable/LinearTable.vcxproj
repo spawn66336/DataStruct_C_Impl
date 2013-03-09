@@ -75,9 +75,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="def.h" />
+    <ClInclude Include="LinkList.h" />
     <ClInclude Include="SqList.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LinkList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SqList.cpp" />
   </ItemGroup>
