@@ -24,6 +24,9 @@
     <ClInclude Include="LinkList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SLinkList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SqList.cpp">
@@ -33,6 +36,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LinkList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SLinkList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
