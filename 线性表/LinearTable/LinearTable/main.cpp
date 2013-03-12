@@ -3,6 +3,7 @@
 #include <iostream>
 #include <conio.h>
 #include "LinkList.h"
+#include "SLinkList.h"
 
 using namespace std;
 
@@ -111,7 +112,7 @@ void LinkList_Test(void)
 			cout<<endl;
 			cout<<"len="<<ListLength_L(l)<<" "; 
 			cout<<"按q退出~!"<<endl;
-			c = getch();
+			c = _getch();
 		}
 		DestroyList_L(l);
 	} 
@@ -151,8 +152,85 @@ void LinkList_Test(void)
 	DestroyList_L(Lc);
 }
 
+void SLinkList_Test()
+{ 
+
+	int L = 0;
+	InitSpace_SL();
+
+	int La  = 0;
+	int Lb = 0;
+	int Lc  = 0;
+
+	InitList_SL(La);
+	InitList_SL(Lb);
+	InitList_SL(Lc);
+
+	for( int i = 0 ; i < 20 ; i++ )
+	{
+		ListInsert_SL(La,i+1,i+1);
+	}
+	cout<<"list a:";
+	ListTraverse_SL(La , Visit_Print );
+	cout<<endl;
+
+	for( int j = 5 , k =0 ; j < 30 ; j++ , k++ )
+	{
+		ListInsert_SL(Lb,(k+1), j+1);
+	}
+	cout<<"list b:";
+	ListTraverse_SL(Lb , Visit_Print );
+	cout<<endl;
+
+	//MergeList_SL(La,Lb,Lc);
+	//cout<<"list c:";
+	//ListTraverse_SL(Lc , Visit_Print );
+	//cout<<endl;
+
+
+	int S = 0;
+	Difference_SL(La,Lb,S);
+	cout<<"list S:";
+	ListTraverse_SL(S , Visit_Print );
+	cout<<endl;
+
+	DestroyList_SL(La);
+	DestroyList_SL(Lb);
+	DestroyList_SL(Lc);
+	DestroyList_SL(S);
+
+	//if( OK == InitList_SL(L) )
+	//{
+	//	int input = 0;
+	//	int insert_pos = 0;
+	//	int c = 0;
+
+	//	while( c != 'q' )
+	//	{ 
+	//			cout<<"请输入插入的数据:";
+	//			cin>>input; 
+	//			cout<<"请输入插入位置:";
+	//			cin>>insert_pos;
+	//			if( OK != ListInsert_SL(L ,insert_pos,input) )
+	//			{
+	//				cout<<"插入失败!!!"<<endl;
+	//			}
+	//			cout<<"list :";
+	//			ListTraverse_SL( L , Visit_Print );
+	//			cout<<endl;
+	//			cout<<"len="<<ListLength_SL(L)<<endl;
+	//			cout<<"pool capacity="<<GetCapacity_SL()<<endl;
+	//			cout<<"alloc size="<<GetAllocSize_SL()<<endl;
+	//			cout<<"按q退出~!"<<endl;
+	//			c = getch(); 
+	//	}
+	//	DestroyList_SL(L);
+	//}
+}
+
 void main()
 {
 	//SqList_Test();
-	LinkList_Test();
+	//LinkList_Test();
+	SLinkList_Test();
 }
