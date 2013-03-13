@@ -75,11 +75,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="def.h" />
+    <ClInclude Include="DuLinkList.h" />
     <ClInclude Include="LinkList.h" />
     <ClInclude Include="SLinkList.h" />
     <ClInclude Include="SqList.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DuLinkList.cpp" />
     <ClCompile Include="LinkList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SLinkList.cpp" />

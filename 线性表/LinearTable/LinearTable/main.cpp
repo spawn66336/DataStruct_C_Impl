@@ -4,6 +4,7 @@
 #include <conio.h>
 #include "LinkList.h"
 #include "SLinkList.h"
+#include "DuLinkList.h"
 
 using namespace std;
 
@@ -228,9 +229,28 @@ void SLinkList_Test()
 	//}
 }
 
+void DuLinkList_Test(void)
+{
+	DuLinkList L;
+	memset( &L , 0 , sizeof(L) );
+
+	InitList_DuL(L);
+
+	for( int i = 0 ; i < 20 ; i++ )
+	{
+		LP_DuLNode new_node = NULL;
+		MakeNode(new_node , i);
+		Append_DuL( L , new_node );
+	} 
+
+	ListTraverse_DuL( L , Visit_Print );
+	DestroyList_DuL(L);
+}
+
 void main()
 {
 	//SqList_Test();
 	//LinkList_Test();
-	SLinkList_Test();
+	//SLinkList_Test();
+	DuLinkList_Test();
 }
