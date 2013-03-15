@@ -4,6 +4,7 @@
 
 typedef struct DuLNode{
 	ElemType data;
+	int freq;			//结点的访问频度
 	struct DuLNode	*prior;
 	struct DuLNode   *next;
 }DuLNode , *LP_DuLNode;

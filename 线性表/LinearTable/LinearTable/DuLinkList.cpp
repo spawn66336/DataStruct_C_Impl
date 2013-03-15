@@ -9,6 +9,7 @@ Status MakeNode( LP_DuLNode&p , ElemType e )
 
 	p = new DuLNode;
 	p->data = e;
+	p->freq = 0;
 	p->prior = p;
 	p->next = p;
 	return OK;

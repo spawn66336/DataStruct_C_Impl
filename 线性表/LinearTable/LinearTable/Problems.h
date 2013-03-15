@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LinkList.h"
+#include "DuLinkList.h"
 
 /*
 	例2-24: 写一算法将单链表（带头节点）中值重复的节点删除，使表中节点的值均不相同
@@ -12,3 +13,9 @@ Status ClearSameElem( LinkList L );
 				请设计一个算法，将p所指节点的后继节点变为p所指节点的前驱节点。
 */
 void Adjust( LinkList& p);
+
+/*
+	例2-26
+*/
+
+void Locate( DuLinkList& L , const ElemType& e );

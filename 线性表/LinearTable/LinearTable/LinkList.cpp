@@ -472,27 +472,73 @@ Status DestroyList_L( LinkList& L )
 
 	 int c = 1;
 	 LinkList p = L->next;
+	 LinkList q = L;  // q保存的是p的前驱
 	 while( p != L )
 	 {
 		 if( c == i )
 		 {
 			 break;
 		 }
+
 		 c++;
+		 q = p;
 		 p = p->next;
 	 }
-
-
-
-	 return OK;
+	  
+	if( i == c )
+	{
+		LinkList n = new LNode;
+		n->data = e;
+		n->next = p;
+		q->next = n;
+		return OK;
+	} 
+	 return ERROR;
  }
 
   Status ListDelete_CL( LinkList L , const int i , ElemType& e )
  {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
 
+	 int c = 1;
+	 LinkList p = L->next;
+	 LinkList q = L;  // q保存的是p的前驱
+	 while( p != L )
+	 {
+		 if( c == i )
+		 {
+			 q->next = p->next;
+			 e = p->data;
+			 delete p;
+			 p = NULL;
+			 return OK;
+		 }
+
+		 c++;
+		 q = p;
+		 p = p->next;
+	 }
+	 return ERROR;
  }
 
   Status ListTraverse_CL( LinkList L , PFVISIT visit )
  {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
 
+	  LinkList p = L->next;
+	  while( p != L )
+	  {
+		 if( VISIT_BREAK == visit( p->data ) )
+		 {
+			 break;
+		 }
+		  p = p->next;
+	  }
+	  return OK;
  }

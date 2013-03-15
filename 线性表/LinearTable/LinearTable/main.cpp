@@ -254,48 +254,103 @@ void DuLinkList_Test(void)
 	//ListTraverse_DuL( L , Visit_Print );
 	//DestroyList_DuL(L);
 
-	DuLinkList La;
-	DuLinkList Lb;
-	DuLinkList Lc;
-	memset( &La , 0 , sizeof(La) );
-	memset( &Lb , 0 , sizeof(Lb) );
-	memset( &Lc , 0 , sizeof(Lc) );
+	//DuLinkList La;
+	//DuLinkList Lb;
+	//DuLinkList Lc;
+	//memset( &La , 0 , sizeof(La) );
+	//memset( &Lb , 0 , sizeof(Lb) );
+	//memset( &Lc , 0 , sizeof(Lc) );
 
-	for( int i = 0 ; i < 20 ; i++ )
+	//for( int i = 0 ; i < 20 ; i++ )
+	//{
+	//	LP_DuLNode new_node = NULL;
+	//	MakeNode(new_node , i);
+	//	Append_DuL( La , new_node );
+	//}
+	//cout<<"list a:";
+	//ListTraverse_DuL( La , Visit_Print );
+	//cout<<endl;
+
+	//for( int i = 5 ; i < 30 ; i++ )
+	//{
+	//	LP_DuLNode new_node = NULL;
+	//	MakeNode(new_node , i);
+	//	Append_DuL( Lb , new_node );
+	//}
+	//cout<<"list b:";
+	//ListTraverse_DuL( Lb , Visit_Print );
+	//cout<<endl;
+
+	//MergeList_DuL( La , Lb , Lc , Compare );
+
+	//cout<<"list c:";
+	//ListTraverse_DuL( Lc , Visit_Print );
+	//cout<<endl;
+
+	//DestroyList_DuL(La);
+	//DestroyList_DuL(Lb);
+	//DestroyList_DuL(Lc);
+
+	DuLinkList L;
+	memset( &L , 0 , sizeof(L) );
+	InitList_DuL(L);
+
+	for( int i = 1 ; i <= 20 ; i++ )
 	{
-		LP_DuLNode new_node = NULL;
-		MakeNode(new_node , i);
-		Append_DuL( La , new_node );
+		LP_DuLNode p = NULL; 
+		MakeNode(p,i);
+		Append_DuL(L,p);
 	}
-	cout<<"list a:";
-	ListTraverse_DuL( La , Visit_Print );
+	ListTraverse_DuL(L , Visit_Print );
 	cout<<endl;
 
-	for( int i = 5 ; i < 30 ; i++ )
+	for( int i = 1 ; i<= 10 ; i++ )
 	{
-		LP_DuLNode new_node = NULL;
-		MakeNode(new_node , i);
-		Append_DuL( Lb , new_node );
+		Locate( L , 7 );
 	}
-	cout<<"list b:";
-	ListTraverse_DuL( Lb , Visit_Print );
+
+	for( int i = 1 ; i <= 9 ; i++ )
+	{
+		Locate( L , 6 );
+	}
+
+	for( int i = 1 ; i <= 8 ; i++ )
+	{
+		Locate( L , 5);
+	}
+	ListTraverse_DuL(L , Visit_Print );
 	cout<<endl;
 
-	MergeList_DuL( La , Lb , Lc , Compare );
+	DestroyList_DuL(L);
+}
 
-	cout<<"list c:";
-	ListTraverse_DuL( Lc , Visit_Print );
+void CLinkList_Test(void)
+{
+	LinkList L = NULL;
+	InitList_CL(L);
+	for( int i = 1 ; i <= 20 ; i++ )
+	{
+		ListInsert_CL( L , i , i );
+	}
+	ListTraverse_CL( L , Visit_Print );
 	cout<<endl;
 
-	DestroyList_DuL(La);
-	DestroyList_DuL(Lb);
-	DestroyList_DuL(Lc);
+	LinkList p = L->next;
+	for( int i = 1 ; i <= 5 ; i++ )
+	{
+		p = p->next;
+	}
+	Adjust(p);
+	ListTraverse_CL( L , Visit_Print );
+	cout<<endl;
+	DestroyList_CL(L);
 }
 
 void main()
 {
 	//SqList_Test();
-	LinkList_Test();
+	//LinkList_Test();
+	//CLinkList_Test();
 	//SLinkList_Test();
-	//DuLinkList_Test();
+	DuLinkList_Test();
 }
