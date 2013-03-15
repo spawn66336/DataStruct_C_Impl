@@ -37,3 +37,4 @@ Status  LocatePos_DuL( DuLinkList L , int i , LP_DuLNode& p );
 LP_DuLNode		LocateElem_DuL( DuLinkList L , ElemType e , PFCOMPARE cmp );
 Status  ListTraverse_DuL( DuLinkList L , PFVISIT visit );
 
+Status MergeList_DuL( DuLinkList& La , DuLinkList& Lb , DuLinkList& Lc , PFCOMPARE cmp );

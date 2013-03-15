@@ -201,6 +201,7 @@ Status DestroyList_L( LinkList& L )
 		} 
 		pre_p = p;
 		p = p->next;
+		c++;
 	}
 
 	if( i == len+1 )
@@ -295,4 +296,203 @@ Status DestroyList_L( LinkList& L )
 	 {
 		 pc->next = pb;
 	 } 
+ }
+
+
+  Status InitList_CL( LinkList& L )
+ {
+	 if( L != NULL )
+	 {
+		 return ERROR;
+	 }
+
+	 L = new LNode;
+	 L->next = L;
+	 return OK;
+ }
+
+  Status DestroyList_CL( LinkList& L )
+ {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
+	 ClearList_CL(L);
+	 delete L;
+	 L = NULL;
+	 return OK;
+ }
+
+  Status ClearList_CL( LinkList L )
+ {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
+	  
+	 LinkList p = L->next; 
+	 while( p != L )
+	 { 
+		  L->next = p->next;
+		  delete p;
+		  p = L->next;
+	 }
+
+	 L->next = L;
+	 return OK;
+ }
+
+  Status ListEmpty_CL( LinkList L )
+ {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
+
+	 return ( L->next == L );
+ }
+
+  Status ListLength_CL( LinkList L )
+ {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
+
+	 int len = 0;
+	 LinkList p = L->next;
+	 while( p != L )
+	 {
+		 len++;
+		 p = p->next;
+	 }
+	 return len;
+ }
+
+  Status GetElem_CL( LinkList L , const int i , ElemType& e )
+ {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
+
+	 int c = 1;
+	 LinkList p = L->next;
+	 while( p != L )
+	 { 
+		 if( c == i )
+		 {
+			 e = p->data;
+			 return OK;
+		 }
+		 c++;
+		 p = p->next;
+	 }
+	 return ERROR;
+ }
+
+  Pos LocateElem_CL( LinkList L , const ElemType& e , PFCOMPARE cmp /*= Compare */ )
+ {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
+
+	 int c = 1;
+	 LinkList p = L->next;
+	 while( p != L )
+	 { 
+		 if( L_EQUAL_R == cmp( p->data , e ) )
+		 {
+			return c;
+		 } 
+		 c++;
+		 p = p->next;
+	 }
+
+	 return ERROR;
+ }
+
+  Status PriorElem_CL( LinkList L , const ElemType& cur_e , ElemType& pre_e )
+ {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
+
+	LinkList q = L;
+	LinkList p = L->next;
+	while( p != L )
+	{
+		if( p->data == cur_e )
+		{
+			if( q != L )
+			{
+				pre_e = q->data;
+				return OK;
+			}
+		}
+		q = p;
+		p = p->next;
+	} 
+	 return ERROR;
+ }
+
+  Status NextElem_CL( LinkList L , const ElemType& cur_e , ElemType& next_e )
+ {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
+	  
+	 LinkList p = L->next;
+	 LinkList q = L->next->next;
+	 while( p != L )
+	 {
+		 if( p->data == cur_e )
+		 {
+			 if( q != L )
+			 { 
+				 next_e = q->data;
+				 return OK;
+			 }
+		 }
+		 p = q;
+		 q = q->next;
+	 } 
+	 return ERROR;
+ }
+
+  Status ListInsert_CL( LinkList L , const int i , const ElemType& e )
+ {
+	 if( L == NULL )
+	 {
+		 return ERROR;
+	 }
+
+	 int c = 1;
+	 LinkList p = L->next;
+	 while( p != L )
+	 {
+		 if( c == i )
+		 {
+			 break;
+		 }
+		 c++;
+		 p = p->next;
+	 }
+
+
+
+	 return OK;
+ }
+
+  Status ListDelete_CL( LinkList L , const int i , ElemType& e )
+ {
+
+ }
+
+  Status ListTraverse_CL( LinkList L , PFVISIT visit )
+ {
+
  }

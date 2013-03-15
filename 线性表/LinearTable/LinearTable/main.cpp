@@ -5,6 +5,7 @@
 #include "LinkList.h"
 #include "SLinkList.h"
 #include "DuLinkList.h"
+#include "Problems.h"
 
 using namespace std;
 
@@ -115,10 +116,17 @@ void LinkList_Test(void)
 			cout<<"°´qÍË³ö~!"<<endl;
 			c = _getch();
 		}
+
+		ClearSameElem(l);
+
+		cout<<"list :";
+		ListTraverse_L( l , Visit_Print );
+		cout<<endl;
+
 		DestroyList_L(l);
 	} 
 
-	LinkList La = NULL;
+	/*LinkList La = NULL;
 	LinkList Lb = NULL;
 	LinkList Lc  = NULL;
 
@@ -150,7 +158,7 @@ void LinkList_Test(void)
 
 	DestroyList_L(La);
 	DestroyList_L(Lb);
-	DestroyList_L(Lc);
+	DestroyList_L(Lc);*/
 }
 
 void SLinkList_Test()
@@ -231,26 +239,63 @@ void SLinkList_Test()
 
 void DuLinkList_Test(void)
 {
-	DuLinkList L;
-	memset( &L , 0 , sizeof(L) );
+	//DuLinkList L;
+	//memset( &L , 0 , sizeof(L) );
 
-	InitList_DuL(L);
+	//InitList_DuL(L);
+
+	//for( int i = 0 ; i < 20 ; i++ )
+	//{
+	//	LP_DuLNode new_node = NULL;
+	//	MakeNode(new_node , i);
+	//	Append_DuL( L , new_node );
+	//} 
+
+	//ListTraverse_DuL( L , Visit_Print );
+	//DestroyList_DuL(L);
+
+	DuLinkList La;
+	DuLinkList Lb;
+	DuLinkList Lc;
+	memset( &La , 0 , sizeof(La) );
+	memset( &Lb , 0 , sizeof(Lb) );
+	memset( &Lc , 0 , sizeof(Lc) );
 
 	for( int i = 0 ; i < 20 ; i++ )
 	{
 		LP_DuLNode new_node = NULL;
 		MakeNode(new_node , i);
-		Append_DuL( L , new_node );
-	} 
+		Append_DuL( La , new_node );
+	}
+	cout<<"list a:";
+	ListTraverse_DuL( La , Visit_Print );
+	cout<<endl;
 
-	ListTraverse_DuL( L , Visit_Print );
-	DestroyList_DuL(L);
+	for( int i = 5 ; i < 30 ; i++ )
+	{
+		LP_DuLNode new_node = NULL;
+		MakeNode(new_node , i);
+		Append_DuL( Lb , new_node );
+	}
+	cout<<"list b:";
+	ListTraverse_DuL( Lb , Visit_Print );
+	cout<<endl;
+
+	MergeList_DuL( La , Lb , Lc , Compare );
+
+	cout<<"list c:";
+	ListTraverse_DuL( Lc , Visit_Print );
+	cout<<endl;
+
+	DestroyList_DuL(La);
+	DestroyList_DuL(Lb);
+	DestroyList_DuL(Lc);
 }
 
 void main()
 {
 	//SqList_Test();
-	//LinkList_Test();
+	LinkList_Test();
 	//SLinkList_Test();
-	DuLinkList_Test();
+	//DuLinkList_Test();
 }

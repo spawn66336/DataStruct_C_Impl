@@ -64,6 +64,8 @@ Status InsFirst_DuL(  DuLinkList& L , LP_DuLNode s )
 {
 	if( L.head == NULL )
 	{
+		s->next = s;
+		s->prior = s;
 		L.head = s;
 		L.len = 1;
 		return OK;
@@ -99,6 +101,9 @@ Status DelFirst_DuL(  DuLinkList& L , LP_DuLNode& q )
 		L.head = old_head->next;
 	}
 	L.len--;
+
+	q->next = q;
+	q->prior = q;
 	 
 	return OK;
 }
@@ -107,6 +112,8 @@ Status Append_DuL( DuLinkList& L , LP_DuLNode s )
 { 
 	if( L.head == NULL )
 	{
+		s->next = s;
+		s->prior = s;
 		L.head = s;
 		L.len = 1;
 		return OK;
@@ -138,6 +145,10 @@ Status Remove_DuL( DuLinkList& L , LP_DuLNode& q )
 		L.head->prior = q->prior;
 	}
 	L.len--;
+
+	q->next = q;
+	q->prior = q;
+
 	return OK;
 }
 
@@ -277,5 +288,46 @@ Status ListTraverse_DuL( DuLinkList L , PFVISIT visit )
 		}
 		q = q->next;
 	}while( q != L.head );
+	return OK;
+}
+
+Status MergeList_DuL( DuLinkList& La , DuLinkList& Lb , DuLinkList& Lc , PFCOMPARE cmp )
+{
+	int ret = 0;
+	if( OK != ( ret = InitList_DuL(Lc) ) )
+	{
+		return ret;
+	}
+
+
+	while( GetHead_DuL(La) && GetHead_DuL(Lb) )
+	{
+		LP_DuLNode pa = GetHead_DuL(La);
+		LP_DuLNode pb = GetHead_DuL(Lb);
+
+		if( L_LESS_R == cmp(pa->data , pb->data ) )
+		{
+			DelFirst_DuL( La , pa );
+			Append_DuL( Lc , pa );
+		}else{
+			DelFirst_DuL(Lb , pb);
+			Append_DuL( Lc , pb);
+		} 
+	}
+
+	while(  GetHead_DuL(La) )
+	{
+		LP_DuLNode pa = NULL;
+		DelFirst_DuL(La , pa);
+		Append_DuL( Lc , pa ); 
+	}
+
+	while( GetHead_DuL(Lb) )
+	{
+		LP_DuLNode  pb = NULL;
+		DelFirst_DuL(Lb , pb);
+		Append_DuL( Lc , pb ); 
+	}
+	 
 	return OK;
 }
