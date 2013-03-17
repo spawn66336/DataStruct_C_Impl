@@ -45,3 +45,22 @@ extern Status NextElem_CL( LinkList L , const ElemType& cur_e , ElemType& next_e
 extern Status ListInsert_CL( LinkList L , const int i , const ElemType& e);
 extern Status ListDelete_CL( LinkList L , const int i , ElemType& e );
 extern Status ListTraverse_CL( LinkList L , PFVISIT visit );
+
+
+/*
+===================
+		无头结点的单循环链表
+===================
+*/
+extern Status InitList_CLNH( LinkList& L);
+extern Status DestroyList_CLNH( LinkList& L);
+extern Status ClearList_CLNH( LinkList& L);
+extern Status ListEmpty_CLNH( LinkList L);
+extern Status ListLength_CLNH( LinkList L); 
+extern Status GetElem_CLNH( LinkList L , const int i  , ElemType& e);
+extern Pos	  LocateElem_CLNH( LinkList L , const ElemType& e , PFCOMPARE cmp = Compare );
+extern Status PriorElem_CLNH( LinkList L , const ElemType& cur_e , ElemType& pre_e );
+extern Status NextElem_CLNH( LinkList L , const ElemType& cur_e , ElemType& next_e );
+extern Status ListInsert_CLNH( LinkList& L , const int i , const ElemType& e);
+extern Status ListDelete_CLNH( LinkList& L , const int i , ElemType& e );
+extern Status ListTraverse_CLNH( LinkList L , PFVISIT visit );

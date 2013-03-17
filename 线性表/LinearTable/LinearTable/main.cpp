@@ -92,39 +92,39 @@ void SqList_Test(void)
 
 void LinkList_Test(void)
 {
-	LinkList l = NULL;
-	
-	if( OK == InitList_L(l) )
-	{
-		int input = 0;
-		int insert_pos = 0;
-		int c = 0; 
-		cout<<"开始构建队列!"<<endl;
-		while( c != 'q' ){
-			cout<<"请输入插入的数据:";
-			cin>>input; 
-			cout<<"请输入插入位置:";
-			cin>>insert_pos;
-			if( OK != ListInsert_L(l,insert_pos,input) )
-			{
-				cout<<"插入失败!!!"<<endl;
-			}
-			cout<<"list :";
-			ListTraverse_L( l , Visit_Print );
-			cout<<endl;
-			cout<<"len="<<ListLength_L(l)<<" "; 
-			cout<<"按q退出~!"<<endl;
-			c = _getch();
-		}
+	//LinkList l = NULL;
+	//
+	//if( OK == InitList_L(l) )
+	//{
+	//	int input = 0;
+	//	int insert_pos = 0;
+	//	int c = 0; 
+	//	cout<<"开始构建队列!"<<endl;
+	//	while( c != 'q' ){
+	//		cout<<"请输入插入的数据:";
+	//		cin>>input; 
+	//		cout<<"请输入插入位置:";
+	//		cin>>insert_pos;
+	//		if( OK != ListInsert_L(l,insert_pos,input) )
+	//		{
+	//			cout<<"插入失败!!!"<<endl;
+	//		}
+	//		cout<<"list :";
+	//		ListTraverse_L( l , Visit_Print );
+	//		cout<<endl;
+	//		cout<<"len="<<ListLength_L(l)<<" "; 
+	//		cout<<"按q退出~!"<<endl;
+	//		c = _getch();
+	//	}
 
-		ClearSameElem(l);
+	//	ClearSameElem(l);
 
-		cout<<"list :";
-		ListTraverse_L( l , Visit_Print );
-		cout<<endl;
+	//	cout<<"list :";
+	//	ListTraverse_L( l , Visit_Print );
+	//	cout<<endl;
 
-		DestroyList_L(l);
-	} 
+	//	DestroyList_L(l);
+	//} 
 
 	/*LinkList La = NULL;
 	LinkList Lb = NULL;
@@ -159,6 +159,44 @@ void LinkList_Test(void)
 	DestroyList_L(La);
 	DestroyList_L(Lb);
 	DestroyList_L(Lc);*/
+
+
+	LinkList La = NULL;
+	LinkList Lb = NULL;
+
+	InitList_L( La );
+	InitList_L( Lb );
+
+	for( int i = 1 ; i <=20 ; i++ )
+	{
+		ListInsert_L(La , i , i );
+	}
+	cout<<"La: ";
+	ListTraverse_L(La , Visit_Print );
+	cout<<endl;
+
+	for( int j = 10 ; j <= 30 ; j++ )
+	{
+		ListInsert_L( Lb , ListLength_L(Lb)+1 , j );
+	}
+	cout<<"Lb: ";
+	ListTraverse_L( Lb , Visit_Print );
+	cout<<endl;
+
+	MergeList( La , Lb);
+
+	cout<<"AUB: ";
+	ListTraverse_L( La , Visit_Print );
+	cout<<endl;
+
+	cout<<"AnB: ";
+	ListTraverse_L( Lb , Visit_Print );
+	cout<<endl;
+	 
+
+
+	DestroyList_L(La);
+	DestroyList_L(Lb);
 }
 
 void SLinkList_Test()
@@ -346,11 +384,59 @@ void CLinkList_Test(void)
 	DestroyList_CL(L);
 }
 
+void LinkList_NoHead_Test(void)
+{
+	LinkList L;
+	InitList_CLNH(L);
+
+	for( int i = 1 ; i <= 20 ; i++ )
+	{
+		ListInsert_CLNH( L , i , i );
+	}
+	cout<<"L : ";
+	ListTraverse_CLNH( L , Visit_Print );
+	cout<<endl;
+
+	ReverseList( L );
+	cout<<"逆序 L : ";
+	ListTraverse_CLNH( L , Visit_Print );
+	cout<<endl;
+
+	DestroyList_CLNH(L);
+
+}
+
+void Problem_Test(void)
+{
+	SqList L;
+	int test_data[] = { 1,1,2,3,3,4,6,8,9,9 };
+	memset( &L , 0 , sizeof(L) );
+	InitList_Sq(L);
+
+	for( int i = 0 ; i < sizeof(test_data)/4 ; i++ )
+	{
+		ListInsert_Sq( L , i+1 , test_data[i] );
+	}
+	cout<<"L 紧缩前: ";
+	ListTraverse_Sq( L , Visit_Print );
+	cout<<endl;
+	
+	DeleteSameEelems( L);
+
+	cout<<"L 紧缩后: ";
+	ListTraverse_Sq( L , Visit_Print );
+	cout<<endl;
+
+	DestroyList_Sq(L);
+}
+
 void main()
 {
 	//SqList_Test();
 	//LinkList_Test();
 	//CLinkList_Test();
 	//SLinkList_Test();
-	DuLinkList_Test();
+	//DuLinkList_Test();
+	//LinkList_NoHead_Test();
+	Problem_Test();
 }

@@ -542,3 +542,252 @@ Status DestroyList_L( LinkList& L )
 	  }
 	  return OK;
  }
+
+   Status InitList_CLNH( LinkList& L )
+  {
+	  L = NULL;
+	  return OK;
+  }
+
+  Status DestroyList_CLNH( LinkList& L )
+  {
+		return ClearList_CLNH(L);
+  }
+
+  Status ClearList_CLNH( LinkList& L )
+  {
+	  if( L == NULL )
+	  {
+		  return ERROR;
+	  }
+
+	  LinkList p = L;
+	  do 
+	  {
+		  LinkList s = p;
+		  p = p->next;
+		  delete s; 
+	  } while ( p != L );
+
+	  L = NULL;
+	  return OK;
+  }
+
+ Status ListEmpty_CLNH( LinkList L )
+  {
+	  return L == NULL;
+  }
+
+  Status ListLength_CLNH( LinkList L )
+  {
+	  if( L == NULL )
+	  {
+		  return 0;
+	  }
+
+	  int len = 0;
+	  LinkList p = L;
+	  do 
+	  {
+			len++;
+			p = p->next;
+	  } while ( p != L );
+
+	  return len;
+  }
+
+   Status GetElem_CLNH( LinkList L , const int i , ElemType& e )
+  {
+	  if( L == NULL )
+	  {
+		  return ERROR;
+	  }
+
+	  int c = 1;
+	  LinkList p = L;
+
+	  do 
+	  {
+		  if( c == i )
+		  {
+			  e = p->data;
+			  return OK;
+		  }
+		  c++;
+		  p = p->next;
+	  }while( p != L );
+
+	  return ERROR;
+  }
+
+   Pos LocateElem_CLNH( LinkList L , const ElemType& e , PFCOMPARE cmp /*= Compare */ )
+  {
+	  if( L == NULL )
+	  {
+		  return ERROR;
+	  }
+
+	  int c = 1;
+	  LinkList p = L;
+	  do 
+	  {
+		  if( L_EQUAL_R == cmp( e , p->data) )
+		  {
+			  return c;
+		  }
+		  c++;
+		  p = p->next;
+	  } while ( p != L );
+
+	  return ERROR;
+  }
+
+ Status PriorElem_CLNH( LinkList L , const ElemType& cur_e , ElemType& pre_e )
+  {
+	  if( L == NULL )
+	  {
+		  return ERROR;
+	  }
+
+	  LinkList pp = L;
+	  LinkList p = L->next;
+	 do 
+	 {
+		  if( p->data == cur_e )
+		  {
+			  pre_e = pp->data;
+			  return OK;
+		  }
+		  pp = p;
+		  p = p->next;
+
+	  }while( p != L->next );
+
+	 return ERROR;
+  }
+
+  Status NextElem_CLNH( LinkList L , const ElemType& cur_e , ElemType& next_e )
+  {
+	  if( L == NULL )
+	  {
+		  return ERROR;
+	  }
+	   
+	  LinkList p = L;
+	  do 
+	  {
+		  if( p->data == cur_e )
+		  {
+			 next_e = p->next->data;
+			 return OK;
+		  }
+		  p = p->next;
+	  } while ( p != L );
+
+	  return ERROR;
+  }
+
+ Status ListInsert_CLNH( LinkList& L , const int i , const ElemType& e )
+ {
+	 if( L == NULL )
+	 {
+		 if( i == 1 )
+		 {
+			 L = new LNode;
+			 L->next = L;
+			 L->data = e;
+			 return OK;
+		 }
+		 return ERROR;
+	 } 
+	  LinkList pp = L;
+	  LinkList p = L;
+	  while( pp->next != L ) pp = pp->next;
+
+	   int c = 1;
+
+	  do 
+	  {
+		  if( c == i )
+		  {
+			  pp->next = new LNode;
+			  pp->next->next = p;
+			  pp->data = e;
+
+			  if( c == 1 )
+			  {
+				  L = pp->next;
+			  }
+			  return OK;
+		  }
+		  c++;
+		  pp = p;
+		  p = p->next;
+	  } while ( p != L );
+
+	  //ÔÚ¶ÓÎ²²åÈë
+	  if( c == i )
+	  {
+		  pp->next = new LNode;
+		  pp->next->next = p;
+		  pp->next->data = e;
+		  return OK;
+	  }
+	  return ERROR;
+  }
+
+  Status ListDelete_CLNH( LinkList& L , const int i , ElemType& e )
+  {
+	  if( L == NULL )
+	  {
+		  return ERROR;
+	  } 
+	  LinkList pp = L;
+	  LinkList p = L;
+
+	  while( pp->next != L ) pp = pp->next;
+		
+	  int c = 1;
+	  do 
+	  {
+		  if( c == i )
+		  {
+			  e = p->data;
+			  pp->next = p->next;
+			  if( c == 1 )
+			  {
+				  L = p->next;
+			  }
+			  delete p;
+			  return OK;
+		  }
+
+		  c++;
+		  pp = p;
+		  p = p->next;
+	  } while ( p != L );
+
+	  return ERROR;
+  }
+
+   Status ListTraverse_CLNH( LinkList L , PFVISIT visit )
+  {
+
+	  if( L == NULL )
+	  {
+		  return ERROR;
+	  } 
+
+	  LinkList p = L;
+
+	  do 
+	  {
+		  if( VISIT_BREAK == visit(p->data) )
+		  {
+			  break;
+		  }
+		  p = p->next;
+	  } while ( p != L );
+
+	  return OK;
+  }
