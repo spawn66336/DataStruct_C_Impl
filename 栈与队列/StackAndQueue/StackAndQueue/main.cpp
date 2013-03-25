@@ -1,7 +1,11 @@
 #include <iostream>
 #include "Stack.h"
+#include "T_Stack.h"
+#include "Problems.h"
+#include "T_Queue.h"
 
 using namespace std;
+
 
 void SqStack_Test(void)
 {
@@ -31,7 +35,30 @@ void SqStack_Test(void)
 	DestroyStack_Sq(S);
 }
 
+void T_Stack_Test(void)
+{
+	T_Stack<int> s; 
+	for( int i = 1 ; i <= 100 ; i++ )
+	{
+		s.Push(i);
+	} 
+	Print_T_Stack_BasicType( s ); 
+}
+
+void T_Queue_Test(void)
+{
+	T_Queue<int> q;
+	for( int i = 1 ; i <= 100 ; i++ )
+	{
+		q.EnQueue(i);
+	}
+	Print_T_Queue_BasicType(q);
+}
+
 void main()
 {
-	SqStack_Test();
+	//SqStack_Test();
+	//T_Stack_Test();
+	//Expression_Problem();
+	T_Queue_Test();
 }

@@ -21,12 +21,24 @@
     <ClCompile Include="Stack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Problems.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="def.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="T_Stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Problems.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="T_Queue.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

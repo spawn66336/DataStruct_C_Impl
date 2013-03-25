@@ -2,6 +2,9 @@
 
 #include <stdio.h>
 #include <memory.h>
+#include <iostream>
+
+using namespace std;
 
 #define NULL 0
 #define TRUE   1
